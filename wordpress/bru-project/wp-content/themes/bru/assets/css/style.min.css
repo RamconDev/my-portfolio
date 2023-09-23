@@ -1,0 +1,1 @@
+#members .members .group-name{grid-column:1/4;margin-bottom:20px}#members .members .group{display:grid;grid-template-columns:repeat(5, 1fr);grid-gap:10px;margin-bottom:30px}#members .members .group .card .card-container{padding:30px}@media(max-width: 980px){#members .members .row{grid-template-columns:repeat(2, 1fr)}}/*# sourceMappingURL=style.min.css.map */

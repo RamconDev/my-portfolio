@@ -3,16 +3,21 @@
      * Creating Post Type Miembros
      */
     function miembros_cpt_create() {
+        $cpt_name = 'Miembros';
+        $singular_name = 'miembro';
+        $slug_name = 'miembros';
+        $menu_icon = 'dashicons-groups';
+
         $labels = array(
-            'name' => __( 'Miembros Bru'),
-            'singular_name' => __( 'Miembro'),
-            'menu_name' => __('Miembros','admin_menu'),
+            'name' => __( $cpt_name ),
+            'singular_name' => __( $singular_name),
+            'menu_name' => __($cpt_name,'admin_menu'),
             'view_item' => __( 'ver miembros'),
             'search_items' => __( 'buscar miembros'),
         );
 
         $args = array(
-            'label' => __('Miembros Bru'),
+            'label' => __( $cpt_name ),
             'labels' => $labels,
             'public' => true,
             'publicly_queryable' => true,
@@ -21,34 +26,36 @@
             'has_archive' => true,
             'hierarchical' => false,
             'capability_type' => 'post',
-            'rewrite' => array( 'slug' => 'companies'),
-            'supports'=> array('title' ,'thumbnail','editor'),
+            'rewrite' => array( 'slug' => $slug_name),
+            'supports'=> array('title' ,'thumbnail'),
             'show_in_nav_menus' => true,
-            'menu_icon' => 'dashicons-groups',
+            'menu_icon' => $menu_icon,
             'map_meta_cap' => true
         );
 
-        register_post_type( 'miembro', $args );
+        register_post_type( $cpt_name, $args );
     }
-
     add_action( 'init', 'miembros_cpt_create' );
-
-
-    // function companies_taxonomies() {
-
-    //     register_taxonomy('company-category', array('company'), array(
-    //         'labels' => array(
-    //             'name' => __('Categories'),
-    //             'singular_name' => __('Category'),
-    //             'all_items' => __( 'All Categories' ),
-    //             'parent_item' => null,
-    //             'parent_item_colon' => null
-    //         ),
-    //         'hierarchical' => true,
-    //         'show_ui' => true,
-    //         'show_admin_column' => true,
-    //         'query_var' => true
-    //     ));
-    // }
-
-    // add_action( 'init', 'companies_taxonomies' );
+    /**
+     * Creating Taxonomy Miembros
+     */
+    function register_taxonomy_members() {
+        $taxonomy_name = 'jerarquia';
+        $taxonomy_slug = 'jerarquia';
+        $singular_name = 'jerarquia';
+        $plural_name = 'jerarquias';
+        $cpt_name = 'miembros'; //singular name
+    
+        $args = array(
+            'labels' => array(
+                'name' => $plural_name,
+                'singular_name' => $singular_name,
+            ),
+            'public' => true,
+            'hierarchical' => true,
+            'rewrite' => array('slug' => $taxonomy_slug),
+        );
+    
+        register_taxonomy($taxonomy_name, $cpt_name, $args);
+    }
+    add_action('init', 'register_taxonomy_members');
