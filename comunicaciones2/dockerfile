@@ -1,4 +1,0 @@
-FROM httpd:latest
-
-COPY C:/Users/Shadow_Dell/Documents/landing-test/ /usr/local/apache2/htdocs/
-
